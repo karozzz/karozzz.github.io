@@ -1,0 +1,804 @@
+@import "tailwindcss";
+
+:root {
+  /* Change default light theme to dark theme values */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  
+  /* Move theme variables into the :root selector */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --tw-content: '';
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+}
+
+/* Modify light mode to be opt-in rather than default */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+/* Add smooth scrolling to the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Header animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll reveal animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes progressBar {
+  from { width: 0; }
+  to { width: var(--progress-width); }
+}
+
+/* Parallax effect animations */
+@keyframes parallaxScrollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-30%); }
+}
+
+@keyframes parallaxScrollDown {
+  from { transform: translateY(0); }
+  to { transform: translateY(30%); }
+}
+
+/* Star parallax animations */
+@keyframes parallaxNear {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-100%, 20%); }
+}
+
+@keyframes parallaxMid {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-50%, 10%); }
+}
+
+@keyframes parallaxFar {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-25%, 5%); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Background section transition effects */
+.section-transition {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.section-transition::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--background));
+  z-index: -1;
+}
+
+.section-transition::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, transparent, var(--background));
+  z-index: -1;
+}
+
+/* Additional animation for portfolio hover effects */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+/* Utility animation classes */
+.animate-reveal {
+  opacity: 0;
+}
+
+.animate-reveal.in-view {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-reveal-left.in-view {
+  animation: fadeInLeft 0.6s ease forwards;
+}
+
+.animate-reveal-right.in-view {
+  animation: fadeInRight 0.6s ease forwards;
+}
+
+.animate-scale.in-view {
+  animation: scaleIn 0.6s ease forwards;
+}
+
+.animate-progress-bar.in-view {
+  animation: progressBar 1s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+/* Gentle floating animation for hero image */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-gentle-float {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Back to top button animation */
+@keyframes fadeInButton {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.back-to-top-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+}
+
+.back-to-top-visible {
+  animation: fadeInButton 0.3s ease forwards;
+}
+
+/* Animation for respecting reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Make sure links are clickable */
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Button microinteractions */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(37, 99, 235, 0); }
+  50% { box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
+}
+
+@keyframes smallBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes ringPulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.button-pulse:hover {
+  animation: pulseGlow 2s infinite;
+}
+
+.button-bounce:hover {
+  animation: smallBounce 0.5s ease-in-out infinite;
+}
+
+.button-ring:hover {
+  animation: ringPulse 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Subtle magnetic effect for buttons */
+.magnetic-effect {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.magnetic-effect:hover {
+  transform: scale(1.05);
+}
+
+/* Icon rotation animation */
+.icon-rotate-hover:hover svg {
+  transition: transform 0.5s ease;
+  transform: rotate(12deg);
+}
+
+/* Icon translation for call-to-action */
+.button-with-icon:hover svg {
+  transform: translateX(4px);
+  transition: transform 0.3s ease;
+}
+
+/* Enhanced button microinteractions */
+@keyframes subtlePulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rippleEffect {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* Border shift animation for buttons */
+@keyframes borderShift {
+  0% { border-color: rgba(59, 130, 246, 0.4); }
+  50% { border-color: rgba(59, 130, 246, 1); }
+  100% { border-color: rgba(59, 130, 246, 0.4); }
+}
+
+.button-subtle-pulse:hover {
+  animation: subtlePulse 1s ease-in-out infinite;
+}
+
+.button-ripple:hover {
+  animation: rippleEffect 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.button-border-shift:hover {
+  animation: borderShift 2s ease-in-out infinite;
+}
+
+/* Remove all cursor-related styles */
+.cursor-none {
+  cursor: default;
+}
+
+.cursor-none * {
+  cursor: default;
+}
+
+/* Star animations */
+@keyframes starFall {
+  0% {
+    transform: translateY(-10vh);
+  }
+  100% {
+    transform: translateY(110vh);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.4;
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes meteor {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0) rotate(-45deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  20% {
+    transform: translateX(-25vw) translateY(25vh) rotate(-45deg);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-25vw) translateY(25vh) rotate(-45deg);
+  }
+}
+
+@keyframes rotateElement {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveAcross {
+  from {
+    transform: translateX(0) translateY(0);
+  }
+  to {
+    transform: translateX(-100vw) translateY(50vh);
+  }
+}
+
+@keyframes floatAround {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(50px, 20px);
+  }
+  50% {
+    transform: translate(0, 50px);
+  }
+  75% {
+    transform: translate(-50px, 20px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-meteor {
+  animation: meteor 10s linear infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+/* Custom cursor styles */
+.cursor-none {
+  cursor: none;
+}
+
+.cursor-none * {
+  cursor: none;
+}
+
+.cursor-none a,
+.cursor-none button,
+.cursor-none [role="button"],
+.cursor-none label,
+.cursor-none input,
+.cursor-none select,
+.cursor-none textarea {
+  cursor: none;
+}
+
+/* Enhanced cursor styles for cosmic line trail */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px 2px rgba(99, 102, 241, 0.8);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              background-color 0.3s ease, transform 0.08s ease;
+  transform-origin: center;
+  mix-blend-mode: screen;
+  will-change: transform, width, height; /* Performance optimization */
+}
+
+.custom-cursor.visible {
+  opacity: 1;
+}
+
+.custom-cursor.clicking {
+  transform: scale(0.8);
+  box-shadow: 0 0 20px 5px rgba(129, 140, 248, 0.9);
+}
+
+/* Button hover effect - circular button-like cursor */
+.custom-cursor.hovering {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(59, 130, 246, 0.7);
+  mix-blend-mode: screen;
+  transform: translate(-10px, -10px); /* Adjust for larger size */
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: pulse 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Cursor animation when hovering */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+  70% { box-shadow: 0 0 0 6px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* Enhanced cursor styles for cosmic line trail */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px 2px rgba(99, 102, 241, 0.8);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.08s ease, width 0.2s ease, height 0.2s ease;
+  transform-origin: center;
+  mix-blend-mode: screen;
+}
+
+.custom-cursor.visible {
+  opacity: 1;
+}
+
+.custom-cursor.clicking {
+  transform: scale(0.8);
+  box-shadow: 0 0 20px 5px rgba(129, 140, 248, 0.9);
+}
+
+.cursor-trail-point {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform, opacity;
+}
+
+/* Improve cursor accessibility on interactive elements */
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor,
+[role="button"]:hover ~ .custom-cursor,
+input:hover ~ .custom-cursor,
+select:hover ~ .custom-cursor,
+textarea:hover ~ .custom-cursor,
+label:hover ~ .custom-cursor {
+  width: 18px;
+  height: 18px;
+  background-color: rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 20px 5px rgba(59, 130, 246, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none;
+  }
+  
+  /* Reset cursor style for reduced motion */
+  .cursor-none,
+  .cursor-none * {
+    cursor: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none;
+  }
+  .cursor-trail-point {
+    display: none;
+  }
+  .cursor-none,
+  .cursor-none * {
+    cursor: auto;
+  }
+}
+
+/* Fixed size container for image */
+.fixed-size-container {
+  position: relative;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .fixed-size-container {
+    margin-top: 2rem;
+  }
+}
+
+/* Touch Animation */
+@keyframes touch-ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+    border-width: 15px;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+    border-width: 1px;
+  }
+}
+
+@keyframes touch-glow {
+  0% {
+    box-shadow: 0 0 5px 0 rgba(99, 102, 241, 0.6);
+    background-color: rgba(99, 102, 241, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px 10px rgba(124, 58, 237, 0.4);
+    background-color: rgba(124, 58, 237, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px 0 rgba(99, 102, 241, 0);
+    background-color: rgba(99, 102, 241, 0);
+  }
+}
+
+.touch-animation {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(99, 102, 241, 0.3);
+  border: 5px solid rgba(147, 197, 253, 0.5);
+  animation: touch-ripple 1s cubic-bezier(0.22, 1, 0.36, 1) forwards, 
+             touch-glow 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Secondary touch particles */
+.touch-animation::before,
+.touch-animation::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.6;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(124, 58, 237, 0.3) 50%,
+    transparent 70%
+  );
+}
+
+.touch-animation::before {
+  width: 15px;
+  height: 15px;
+  top: -5px;
+  left: -10px;
+  animation: touch-ripple 0.8s 0.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.touch-animation::after {
+  width: 12px;
+  height: 12px;
+  bottom: -8px;
+  right: -5px;
+  animation: touch-ripple 0.6s 0.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Add loading screen animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-gentle-reveal {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Loading dots animation */
+.loading-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.loading-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(99, 102, 241, 0.7);
+  animation: loadingDots 1.4s infinite ease-in-out both;
+}
+
+.loading-dots span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.loading-dots span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes loadingDots {
+  0%, 80%, 100% { 
+    transform: scale(0);
+    opacity: 0.3;
+  }
+  40% { 
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.7);
+  }
+}
+
+/* Add loading optimization CSS */
+/* Skeleton loader animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.skeleton-shine {
+  animation: shimmer 1.5s infinite;
+}
+
+/* Add content fade-in animation */
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-content-fade-in {
+  animation: contentFadeIn 0.5s ease forwards;
+}
+
+/* Optimize animations to use will-change for better performance */
+.animate-gentle-float,
+.animate-twinkle,
+.custom-cursor,
+[class*='hover:'] {
+  will-change: transform, opacity;
+}
+
+/* Optimize transform animations */
+.animate-progress-bar.in-view,
+.animate-reveal.in-view,
+.animate-reveal-left.in-view,
+.animate-reveal-right.in-view,
+.animate-scale.in-view {
+  will-change: opacity, transform;
+}
+
+/* Use modern CSS features for better performance */
+:root {
+  --tw-content: '';
+  --tw-bg-opacity: 1;
+  --tw-text-opacity: 1;
+}
+
+/* Optimize image loading */
+img {
+  transition: opacity 0.3s ease;
+}
+
+/* Add loading spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(99, 102, 241, 0.2);
+  border-radius: 50%;
+  border-top-color: rgba(99, 102, 241, 0.8);
+  animation: spin 0.8s linear infinite;
+  will-change: transform;
+}
+
+/* Enhance shimmer animation for skeleton loaders */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-150%);
+  }
+  50% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+.skeleton-shine {
+  animation: shimmer 2.5s infinite;
+  will-change: transform;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.05) 20%,
+    rgba(255, 255, 255, 0.1) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  background-position: -100% 0;
+}
+
+/* Add content fade-in animation with improved performance */
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-content-fade-in {
+  animation: contentFadeIn 0.5s ease forwards;
+  will-change: opacity, transform;
+}
