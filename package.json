@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "export": "next export",
-    "deploy": "npm run build && gh-pages -d out",
+    "deploy": "node deploy-gh-pages.js",
     "start": "node start.js",
     "start:fixed": "next start -p 3001",
     "lint": "next lint"
