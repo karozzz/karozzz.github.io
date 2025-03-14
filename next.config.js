@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
   reactStrictMode: true,
+  output: 'export', // Enable static export
+  distDir: 'out', // Specify the output directory for the export
+  basePath: isProd ? '/portfolio' : '', // Adjust the repository name to match yours
+  assetPrefix: isProd ? '/portfolio/' : '', // Adjust the repository name to match yours
   images: {
+    unoptimized: true, // Required for static export on GitHub Pages
     domains: [],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -18,8 +25,6 @@ const nextConfig = {
     optimizeCss: true,
     optimizePackageImports: ['react-icons'],
   },
-  // Enable font optimization
-  optimizeFonts: true,
 };
 
 module.exports = nextConfig;
