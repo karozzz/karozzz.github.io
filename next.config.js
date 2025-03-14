@@ -5,8 +5,9 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export', // Enable static export
   distDir: 'out', // Specify the output directory for the export
-  basePath: isProd ? '' : '', // For GitHub Pages user site, no basePath is needed
-  assetPrefix: isProd ? '' : '', // For GitHub Pages user site, no assetPrefix is needed
+  // Remove specific repository references
+  basePath: '',
+  assetPrefix: '',
   images: {
     unoptimized: true, // Required for static export on GitHub Pages
     domains: [],

@@ -5,7 +5,8 @@ const path = require('path');
 // Configuration
 const outputDir = 'out';
 const branch = 'gh-pages';
-const repoUrl = 'https://github.com/karozzz/karozzz.github.io.git';
+// Remove specific repository URL
+const repoUrl = ''; // Empty string will use the default origin remote
 
 // Main function
 async function main() {
@@ -28,7 +29,11 @@ async function main() {
     
     // Deploy to GitHub Pages
     console.log('\n🚀 Deploying to GitHub Pages...');
-    execSync(`npx gh-pages -d ${outputDir} -b ${branch} -r ${repoUrl}`, { stdio: 'inherit' });
+    const deployCmd = repoUrl 
+      ? `npx gh-pages -d ${outputDir} -b ${branch} -r ${repoUrl}` 
+      : `npx gh-pages -d ${outputDir} -b ${branch}`;
+    
+    execSync(deployCmd, { stdio: 'inherit' });
     
     console.log('\n✅ Deployment complete! Your site should be available shortly.');
   } catch (error) {
